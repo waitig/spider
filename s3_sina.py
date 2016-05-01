@@ -9,7 +9,7 @@ reload(sys)
 sys.setdefaultencoding("utf-8")
 
 
-# ----------- 爬取csdn用户所有文章 -----------
+# ----------- 爬取新浪博客用户所有文章 -----------
 class SpiderSina(SpiderModel):
     def __init__(self):
         self.work_home = 'sina'
