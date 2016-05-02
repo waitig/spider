@@ -9,7 +9,7 @@ sys.setdefaultencoding("utf-8")
 
 
 # ----------- 爬取51cto博客用户所有文章 -----------
-class Spider_Csdn(SpiderModel):
+class Spider_51CTO(SpiderModel):
     def __init__(self):
         headers = {
             'Host': 'blog.51cto.com',
@@ -22,29 +22,31 @@ class Spider_Csdn(SpiderModel):
         }
         SpiderModel.__init__(self, headers)
         self.user_index_reStr = {
-            'urlList': 'href=\"(?P<path_list>/[^/]*?/article/details/\d+)\"',
-            'nextUrl': u'<a href=\"(?P<path_list>/[^\"]*?/article/list/\d+)\">下一页</a>',
+            # href="http://506554897.blog.51cto.com/2823970/1764842"http://os.51cto.com/art/201604/510421.htm
+            'urlList': 'href=\"(?P<path_list>http://[^/]*?.51cto.com/[\"]*?)\"',
+            'nextUrl': '',
             'title': '<title>(?P<path_list>[\s\S]*?)</title>'
         }
         self.page_url_reStr = {
-            'urlList': 'href=\"(?P<path_list>http://blog.csdn.net/[^/]*?/article/details/\d+)\"',
-            'nextUrl': u'<a href=\"(?P<path_list>[^\"]*?\&page=\d+)\">下一页</a>',
+            'urlList': 'href=\"(?P<path_list>http://[^/]*?.51cto.com/[\"]*?)\"',
+            'nextUrl': '',
             'title': '<title>(?P<path_list>[\s\S]*?)</title>'
         }
         self.index_url_reStr = {
-            'urlList': 'href=\"(?P<path_list>/[^/]*?/[^\"]*?\.html)\"',
+            'urlList': 'href=\"(?P<path_list>http://[^/]*?.51cto.com/[\"]*?)\"',
             'nextUrl': '',
             'title': '<title>(?P<path_list>[\s\S]*?)</title>'
         }
         self.post_reStr = {
-            'id': 'http://blog.csdn.net/[^/]*?/article/details/(?P<id>\d+)',
+            'id': 'http://[^/]*?.51cto.com/\d+/(?P<id>\d+)',
             'title': '<title>(?P<path_list>[\s\S]*?)</title>',
-            'keywords': 'blog_articles_tag\']\);\">(?P<keywords>[^<]*?)</a>',
-            'categories': 'blog_articles_fenlei\']\);\">(?P<cate>[\s\S]*?)</span>',
-            'content': u'<div id=\"article_content\" class=\"article_content\">(?P<content>[\s\S]*?)</div>[^<]*?<!--正文 end-->'
+            'keywords': 'class=\"operlink\">(?P<keywords>.*?)</a>',  # <div class="zwnr">
+            'categories': '',
+            'content': u'<div class=\"zwnr\">(?P<content>[\s\S]*?)</div>[^<]*?<div class=\"share5\">',
+            'content1': u'<!--正文 begin-->(?P<content>[\s\S]*?)<!--正文 end-->'
         }
-        self.work_home = 'csdn'
-        self.index_url = 'http://blog.csdn.net/'
+        self.work_home = 'html/cto51'
+        self.index_url = 'http://www.51cto.com/'
         SpiderModel.__init__(self, headers)
 
     def deal_post_title(self, title):
@@ -54,18 +56,21 @@ class Spider_Csdn(SpiderModel):
     def deal_post_content(self, content):
         return re.sub('<script[^>]*?>[\s\S]*?</script>', '', content)
 
+    def deal_pre_url(self):
+        return ''
+
     def __del__(self):
         # SpiderModel.__del__(self)
         pass
 
 
 if __name__ == '__main__':
-    sc = Spider_Csdn()
+    sc = Spider_51CTO()
     mcm = MakeChm()
     mcm.set_save_img(0)
     mcm.set_partlyNum(50)
-    mcm.set_chm_path('E:\pycode\spider\chm\csdn_host')
+    mcm.set_chm_path('E:\pycode\spider\chm\cto51_host')
     sc.set_max_page(1)
-    sc.get_urls('http://blog.csdn.net/u010189918', 1, mcm)
-    sc.get_posts(mcm)
-# sc.get_index_data(mcm)
+    # sc.get_urls('http://blog.csdn.net/u010189918', 1, mcm)
+    # sc.get_posts(mcm)
+    sc.get_index_data(mcm)

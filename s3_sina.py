@@ -43,7 +43,8 @@ class SpiderSina(SpiderModel):
             'keywords': 'by=tag\" target=\"_blank\">(?P<keywords>[^<]*?)</a>',
             'categories': 'blog_articles_fenlei\']\);\">(?P<cate>[\s\S]*?)</span>',
             'content': u'<div id=\"sina_keyword_ad_area2\"[^>]*?>(?P<content>[\s\S]*?)</div>[^<]*?<!--',
-            'content1': u'<!-- 正文开始 -->(?P<content>[\s\S]*?)<!-- 正文结束 -->'
+            'content1': u'<!-- 正文开始 -->(?P<content>[\s\S]*?)<!-- 正文结束 -->',
+            'content2': u'<!-- 内容区 -->(?P<content>[\s\S]*?)<!--/内容区-->'
         }
         SpiderModel.__init__(self, headers)
         self.set_useUrllib2(1)

@@ -19,6 +19,7 @@ class SpiderModel:
         self.splitChar = '-'
         self.se = Spider_Engine(headers)
         self.work_home = ''
+        self.index_url = ''
 
     # Set and get
     def set_useUrllib2(self, used):
@@ -59,7 +60,7 @@ class SpiderModel:
         urlInfo['urlList'] = []
         urlInfo['nextUrl'] = ''
         urlInfo['title'] = ''
-        urlInfo = self.se.get_urls(url, self.user_index_reStr, self.index_url)
+        urlInfo = self.se.get_urls(url, self.user_index_reStr, self.deal_pre_url())
         self.url_list += urlInfo['urlList']
         if (flag == 0):
             blog = self.get_blog(1, urlInfo['title'])
@@ -84,7 +85,7 @@ class SpiderModel:
     def get_page_urls(self, url, type, mcm, flag=0):
         url = self.deal_page_urls(url)
         print 'Loadding page [ ' + str(self.pageNum) + ' ] : ' + url
-        urlInfo = self.se.get_urls(url, self.page_url_reStr, self.index_url)
+        urlInfo = self.se.get_urls(url, self.page_url_reStr, self.deal_pre_url())
         if (flag == 0):
             path = self.get_path(type, url)
             blog = self.get_blog(type, urlInfo['title'])
@@ -111,7 +112,7 @@ class SpiderModel:
         self.get_urls(index_url, 3, mcm)
         self.get_posts(mcm)
         # deal categroy posts
-        urlInfo = self.se.get_urls(self.index_url, self.index_url_reStr, self.index_url)
+        urlInfo = self.se.get_urls(self.index_url, self.index_url_reStr, self.deal_pre_url())
         print urlInfo['urlList']
         for url in urlInfo['urlList']:
             print 'Find url: ' + url
@@ -190,6 +191,9 @@ class SpiderModel:
 
     def deal_next_url(self, url):
         return url
+
+    def deal_pre_url(self):
+        return self.index_url
 
 
 if __name__ == '__main__':
