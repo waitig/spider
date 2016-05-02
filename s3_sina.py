@@ -51,18 +51,30 @@ class SpiderSina(SpiderModel):
 
     # 重写相关代码
     def deal_post_title(self, title):
-        title = title.decode('utf-8').replace('&nbsp;', ' ')
-        titles = title.split('_')
-        return "".join(titles[0:(len(titles) - 2)])
+        try:
+            title = title.decode('utf-8').replace('&nbsp;', ' ')
+            titles = title.split('_')
+            return "".join(titles[0:(len(titles) - 2)])
+        except BaseException, e:
+            print(str(e))
+            return ''
 
     def deal_post_content(self, content):
-        content = content.decode('utf-8').replace('src', 'r_src')
-        content = content.replace('real_r_src', 'src')
-        # print content
-        return re.sub('<script[^>]*?>[\s\S]*?</script>', '', content)
+        try:
+            content = content.decode('utf-8').replace('src', 'r_src')
+            content = content.replace('real_r_src', 'src')
+            # print content
+            return re.sub('<script[^>]*?>[\s\S]*?</script>', '', content)
+        except BaseException, e:
+            print(str(e))
+            return ''
 
     def deal_title(self, title):
-        title = title.decode('utf-8')
+        try:
+            title = title.decode('utf-8')
+        except BaseException, e:
+            print(str(e))
+            title = ''
         return title
 
 
