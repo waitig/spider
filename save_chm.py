@@ -110,6 +110,8 @@ class MakeChm:
 
     def create_hhp(self):
         print 'Start to create hhp file !'
+        blogs = self.blog.split('/')
+        self.blog = blogs[len(blogs) - 1]
         # print unicode(self.blog,'gbk')
         hhpText = ''.join(['[OPTIONS]\r\nCompatibility=1.1 or later\r\nCompiled file=', self.blog, '.chm'
                                                                                                    '\r\nContents file=',

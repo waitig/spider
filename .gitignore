@@ -18,7 +18,9 @@
 .idea/dynamic.xml
 .idea/uiDesigner.xml
 
+/html
 # Gradle:
+/chm
 .idea/gradle.xml
 .idea/libraries
 
