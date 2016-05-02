@@ -68,6 +68,7 @@ class SpiderSina(SpiderModel):
 
 if __name__ == '__main__':
     sc = SpiderSina()
+    sc.set_workHome('html/sina')
     mcm = MakeChm()
     mcm.set_save_img(0)
     mcm.set_partlyNum(20)
