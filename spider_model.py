@@ -105,7 +105,7 @@ class SpiderModel:
 
     # 从主页开始获取所有频道首页文章
     def get_index_data(self, mcm):
-        index_url = self.deal_index_data()
+        index_url = self.deal_index_url()
         self.pageNum = 1
         # deal index posts
         self.get_urls(index_url, 3, mcm)
