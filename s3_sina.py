@@ -32,9 +32,9 @@ class SpiderSina(SpiderModel):
         self.page_url_reStr = {
             'urlList': 'href=\"http://blog.sina.com.cn/(?P<path_list>s/blog_[^\.]*?\.html)',
             'nextUrl': u'<a href=\"\/(?P<path_list>[^\"]*?\/\d+)\" onclick=\"[^\"]*?\">Next &gt;</a>',
-        }
+        }  # href="http://blog.sina.com.cn/lm/history/"
         self.index_url_reStr = {  # http://blog.sina.com.cn/lm/
-            'urlList': 'href=\"http://blog.sina.com.cn/(?P<path_list>/lm/[^/]*?/)\"',
+            'urlList': 'href=\"http://blog.sina.com.cn/(?P<path_list>lm/[^/]*?/)\"',
             'nextUrl': '',
         }
         self.post_reStr = {
@@ -71,13 +71,13 @@ if __name__ == '__main__':
     sc.set_workHome('html/sina')
     mcm = MakeChm()
     mcm.set_save_img(0)
-    mcm.set_partlyNum(20)
+    mcm.set_partlyNum(50)
     mcm.set_chm_path('E:\pycode\spider\chm\sina_host')
     sc.set_dely(1)
     sc.set_max_page(2)
     # http://health.sina.com.cn/
-    sc.get_urls('http://health.sina.com.cn/', 2, mcm)
-    sc.get_posts(mcm)
+    # sc.get_urls('http://health.sina.com.cn', 2, mcm)
+    #sc.get_posts(mcm)
     # sc.get_urls('http://blog.sina.com.cn/s/articlelist_2271569980_0_1.html',1,mcm)
     # sc.get_posts(mcm)
-    #sc.get_index_data(mcm)
+    sc.get_index_data(mcm)

@@ -54,7 +54,8 @@ class Spider_Engine:
                     Reslut = self.se.post(url, self.postData, self.headers, verify=True)
                 else:
                     Reslut = self.se.get(url, headers=self.headers)
-            except requests.exceptions.TooManyRedirects:
+            except BaseException, e:
+                print(str(e))
                 print 'This article not found [404]!'
             text = Reslut.text
         urlList = re.findall(reStr['urlList'], text)
@@ -86,12 +87,8 @@ class Spider_Engine:
         else:
             try:
                 Reslut = self.se.get(url, headers=self.headers)
-            except requests.exceptions.ConnectionError:
-                print 'This article not found [404]!'
-                post['title'] = '404 NOT FOUND!'
-                post['content'] = '404 NOT FOUND!'
-                return post
-            except requests.exceptions.TooManyRedirects:
+            except BaseException, e:
+                print(str(e))
                 print 'This article not found [404]!'
                 post['title'] = '404 NOT FOUND!'
                 post['content'] = '404 NOT FOUND!'
@@ -102,16 +99,16 @@ class Spider_Engine:
         title = re.findall(u'<title>(?P<title>[\s\S]*?)</title>', text, re.S)
         try:
             post['title'] = "".join(title[0].split())
-        except UnicodeDecodeError:
-            print 'Get title unicode decode error!'
+        except BaseException, e:
+            print(str(e))
         id = re.findall(reStr['id'], url)
         # print url
         # print reStr['id']
         if (id != []):
             try:
                 post['id'] = id[0]
-            except UnicodeDecodeError:
-                print 'Get ID unicode decode error!'
+            except BaseException, e:
+                print(str(e))
         keywords = re.findall(reStr['keywords'], text)
         for n in keywords:
             post['keywords'].append(n)
@@ -124,15 +121,16 @@ class Spider_Engine:
             contentKey = 'content' + str(tmp)
             try:
                 content = re.findall(reStr[contentKey], text, re.S)
-            except KeyError:
+            except BaseException, e:
+                print(str(e))
                 content = ['Cant find the content!']
                 break
             tmp += 1
         try:
             # post['content']=re.sub('<\s*script[^>]*>[^<]*<\s*/\s*script\s*>','',content[0])
             post['content'] = content[0]
-        except UnicodeDecodeError:
-            print 'Get content unicode decode error!'
+        except BaseException, e:
+            print(str(e))
         return post
 
     def get_others(self, url, headers, useUrllib=0, usePost=0, postData={}):
@@ -152,7 +150,8 @@ class Spider_Engine:
                 else:
                     print 'Use get'
                     Reslut = self.se.get(url, headers=self.headers)
-            except requests.exceptions.TooManyRedirects:
+            except BaseException, e:
+                print(str(e))
                 print 'This article not found [404]!'
             text = Reslut
         return text

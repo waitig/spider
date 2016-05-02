@@ -112,6 +112,7 @@ class SpiderModel:
         self.get_posts(mcm)
         # deal categroy posts
         urlInfo = self.se.get_urls(self.index_url, self.index_url_reStr, self.index_url)
+        print urlInfo['urlList']
         for url in urlInfo['urlList']:
             print 'Find url: ' + url
             self.get_page_urls(url, 2, mcm)
