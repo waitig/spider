@@ -75,6 +75,9 @@ if __name__ == '__main__':
     mcm.set_chm_path('E:\pycode\spider\chm\sina_host')
     sc.set_dely(1)
     sc.set_max_page(2)
+    # http://health.sina.com.cn/
+    sc.get_urls('http://health.sina.com.cn/', 2, mcm)
+    sc.get_posts(mcm)
     # sc.get_urls('http://blog.sina.com.cn/s/articlelist_2271569980_0_1.html',1,mcm)
     # sc.get_posts(mcm)
-    sc.get_index_data(mcm)
+    #sc.get_index_data(mcm)
