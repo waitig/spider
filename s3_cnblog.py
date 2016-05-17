@@ -11,7 +11,7 @@ sys.setdefaultencoding("utf-8")
 
 # ----------- 爬取csdn用户所有文章 -----------
 class SpiderCnblogs(SpiderModel):
-    def __init__(self):
+    def __init__(self, Spider):
         headers = {
             'Host': 'www.cnblogs.com',
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:44.0) Gecko/20100101 Firefox/44.0',
@@ -22,7 +22,7 @@ class SpiderCnblogs(SpiderModel):
             'Connection': 'keep-alive',
             'Cache-Control': 'max-age=0'
         }
-        SpiderModel.__init__(self, headers)
+        SpiderModel.__init__(self, headers, Spider)
         self.user_index_reStr = {'urlList': 'href=\"http://www.cnblogs.com/(?P<path_list>[^/]*?/p/[^\.]*?\.html)\"',
                                  'nextUrl': u'<a href=\"\/(?P<path_list>[^\"]*?\/\d+)\" onclick=\"[^\"]*?\">Next &gt;</a>',
                                  'title': '<title>(?P<title>[\s\S]*?)</title>'

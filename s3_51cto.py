@@ -10,7 +10,7 @@ sys.setdefaultencoding("utf-8")
 
 # ----------- 爬取51cto博客用户所有文章 -----------
 class Spider_51CTO(SpiderModel):
-    def __init__(self):
+    def __init__(self, Spider):
         headers = {
             'Host': 'blog.51cto.com',
             'User-Agent': ' Mozilla/5.0 (Windows NT 10.0; WOW64; rv:44.0) Gecko/20100101 Firefox/44.0',
@@ -20,7 +20,7 @@ class Spider_51CTO(SpiderModel):
             'Referer': 'http://www.51cto.com/',
             'Connection': 'keep-alive'
         }
-        SpiderModel.__init__(self, headers)
+        SpiderModel.__init__(self, headers, Spider)
         self.user_index_reStr = {
             # href="http://506554897.blog.51cto.com/2823970/1764842"http://os.51cto.com/art/201604/510421.htm
             'urlList': 'href=\"(?P<path_list>http://[^/]*?.51cto.com/[\"]*?)\"',
@@ -47,7 +47,8 @@ class Spider_51CTO(SpiderModel):
         }
         self.work_home = 'html/cto51'
         self.index_url = 'http://www.51cto.com/'
-        SpiderModel.__init__(self, headers)
+
+    #        SpiderModel.__init__(self, headers)
 
     def deal_post_title(self, title):
         titles = title.split('-')

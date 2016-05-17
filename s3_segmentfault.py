@@ -11,7 +11,7 @@ sys.setdefaultencoding("utf-8")
 
 # ----------- 爬取csdn用户所有文章 -----------
 class SpiderSegement(SpiderModel):
-    def __init__(self):
+    def __init__(self, Spider):
         headers = {
             'Host': 'segmentfault.com',
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:44.0) Gecko/20100101 Firefox/44.0',
@@ -22,7 +22,7 @@ class SpiderSegement(SpiderModel):
             'Connection': 'keep-alive',
             'Cache-Control': 'max-age=0'
         }
-        SpiderModel.__init__(self, headers)
+        SpiderModel.__init__(self, headers, Spider)
         self.user_index_reStr = {'urlList': 'href=\"/(?P<path_list>a/\d+)\"',
                                  'nextUrl': u'<a rel=\"next\" href=\"/(?P<path_list>[^>]*?page=\d+)\">'
                                  }

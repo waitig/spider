@@ -11,7 +11,7 @@ sys.setdefaultencoding("utf-8")
 
 # ----------- 爬取csdn用户所有文章 -----------
 class SpiderModel:
-    def __init__(self, headers):
+    def __init__(self, headers, Spider):
         self.url_list = []
         self.dely = 0.3
         self.maxPage = 1
@@ -20,8 +20,12 @@ class SpiderModel:
         self.se = Spider_Engine(headers)
         self.work_home = ''
         self.index_url = ''
+        self.spider = Spider
 
     # Set and get
+    def set_lcdNum(self, num):
+        self.spider.setLcdNum(num)
+
     def set_useUrllib2(self, used):
         self.se.set_useUrllib2(used)
 
@@ -60,6 +64,7 @@ class SpiderModel:
         urlInfo['urlList'] = []
         urlInfo['nextUrl'] = ''
         urlInfo['title'] = ''
+        print self.deal_pre_url()
         urlInfo = self.se.get_urls(url, self.user_index_reStr, self.deal_pre_url())
         self.url_list += urlInfo['urlList']
         if (flag == 0):
@@ -123,6 +128,7 @@ class SpiderModel:
     def get_posts(self, mcm):
         self.deal_get_posts()
         self.url_list = list(set(self.url_list))
+        self.set_lcdNum(len(self.url_list))
         print 'Total ' + str(len(self.url_list)) + ' articles found , start loading.'
         num = 1
         for n in self.url_list:
@@ -194,6 +200,9 @@ class SpiderModel:
 
     def deal_pre_url(self):
         return self.index_url
+
+    def stop_thread(self):
+        del self.url_list[:]
 
 
 if __name__ == '__main__':

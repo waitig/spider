@@ -11,10 +11,8 @@ sys.setdefaultencoding("utf-8")
 
 # ----------- 爬取新浪博客用户所有文章 -----------
 class SpiderSina(SpiderModel):
-    def __init__(self):
-        self.work_home = 'sina'
-        self.index_url = 'http://blog.sina.com.cn/'
-        self.splitChar = '_'
+    def __init__(self, Spider):
+
         headers = {
             'Host': 'blog.sina.com.cn',
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0',
@@ -46,9 +44,12 @@ class SpiderSina(SpiderModel):
             'content1': u'<!-- 正文开始 -->(?P<content>[\s\S]*?)<!-- 正文结束 -->',
             'content2': u'<!-- 内容区 -->(?P<content>[\s\S]*?)<!--/内容区-->'
         }
-        SpiderModel.__init__(self, headers)
+        SpiderModel.__init__(self, headers, Spider)
         self.set_useUrllib2(1)
         self.set_splitChar('_')
+        self.work_home = 'sina'
+        self.index_url = 'http://blog.sina.com.cn/'
+        self.splitChar = '_'
 
     # 重写相关代码
     def deal_post_title(self, title):
@@ -91,6 +92,6 @@ if __name__ == '__main__':
     # http://health.sina.com.cn/
     # sc.get_urls('http://health.sina.com.cn', 2, mcm)
     #sc.get_posts(mcm)
-    # sc.get_urls('http://blog.sina.com.cn/s/articlelist_2271569980_0_1.html',1,mcm)
-    # sc.get_posts(mcm)
-    sc.get_index_data(mcm)
+    sc.get_urls('http://blog.sina.com.cn/s/articlelist_2271569980_0_1.html', 1, mcm)
+    sc.get_posts(mcm)
+    # sc.get_index_data(mcm)

@@ -10,7 +10,7 @@ sys.setdefaultencoding("utf-8")
 
 # ----------- 爬取csdn用户所有文章 -----------
 class Spider_Csdn(SpiderModel):
-    def __init__(self):
+    def __init__(self, Spider):
         headers = {
             'Host': 'blog.csdn.net',
             'User-Agent': ' Mozilla/5.0 (Windows NT 10.0; WOW64; rv:44.0) Gecko/20100101 Firefox/44.0',
@@ -20,7 +20,7 @@ class Spider_Csdn(SpiderModel):
             'Referer': 'http://blog.csdn.net/',
             'Connection': 'keep-alive'
         }
-        SpiderModel.__init__(self, headers)
+        SpiderModel.__init__(self, headers, Spider)
         self.user_index_reStr = {
             'urlList': 'href=\"(?P<path_list>/[^/]*?/article/details/\d+)\"',
             'nextUrl': u'<a href=\"(?P<path_list>/[^\"]*?/article/list/\d+)\">下一页</a>',
@@ -45,7 +45,8 @@ class Spider_Csdn(SpiderModel):
         }
         self.work_home = 'csdn'
         self.index_url = 'http://blog.csdn.net/'
-        SpiderModel.__init__(self, headers)
+
+    #        SpiderModel.__init__(self, headers,Spider)
 
     def deal_post_title(self, title):
         titles = title.split('-')
