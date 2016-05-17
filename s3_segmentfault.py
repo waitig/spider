@@ -40,7 +40,7 @@ class SpiderSegement(SpiderModel):
             'categories': 'blog_articles_fenlei\']\);\">(?P<cate>[\s\S]*?)</span>',
             'content': '<div class=\"article fmt article__content\"[^>]*?>(?P<content>[\s\S]*?)</div>[^<]*?<div class=\"clearfix'
         }
-        self.work_home = 'segmentfault'
+        self.work_home = 'html/segmentfault'
         self.index_url = 'https://segmentfault.com/'
 
     # 重写相关代码

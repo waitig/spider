@@ -43,7 +43,7 @@ class Spider_Csdn(SpiderModel):
             'categories': 'blog_articles_fenlei\']\);\">(?P<cate>[\s\S]*?)</span>',
             'content': '<div id=\"article_content\" class=\"article_content\">(?P<content>[\s\S]*?)</div>[^<]*?<!-- Baidu Button BEGIN -->'
         }
-        self.work_home = 'csdn'
+        self.work_home = 'html/csdn'
         self.index_url = 'http://blog.csdn.net/'
 
     #        SpiderModel.__init__(self, headers,Spider)

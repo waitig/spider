@@ -47,7 +47,7 @@ class SpiderSina(SpiderModel):
         SpiderModel.__init__(self, headers, Spider)
         self.set_useUrllib2(1)
         self.set_splitChar('_')
-        self.work_home = 'sina'
+        self.work_home = 'html/sina'
         self.index_url = 'http://blog.sina.com.cn/'
         self.splitChar = '_'
 

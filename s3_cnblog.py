@@ -45,7 +45,7 @@ class SpiderCnblogs(SpiderModel):
             'content': '<div id=\"cnblogs_post_body\"[^>]*?>(?P<content>[\s\S]*?)</div><div id=\"MySignature\">',
             'content1': '<div id=\"cnblogs_post_body\">(?P<content>[\s\S]*?)</div><div id=\"MySignature\">'
         }
-        self.work_home = 'cnblogs'
+        self.work_home = 'html/cnblogs'
         self.index_url = 'http://www.cnblogs.com/'
 
     # 重写相关代码
