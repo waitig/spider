@@ -1,7 +1,7 @@
 # -*- coding: gbk -*-
 
 import os, urllib, codecs, imghdr
-from bs4 import BeautifulSoup
+#from bs4 import BeautifulSoup
 import sys
 
 reload(sys)
@@ -189,8 +189,9 @@ class MakeChm:
             file.write('</div></body></html>')
             file.flush()
             file.close()
-        except IOError:
-            print "Failed to create html file!"
+        except Exception, ex:
+            print (str(Exception) + ":" + str(ex))
+            pass
         except UnicodeEncodeError:
             print 'Encode Error! Title has illagel word!'
             pass
