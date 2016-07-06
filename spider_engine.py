@@ -81,6 +81,8 @@ class Spider_Engine:
         post['categories'] = []
         post['content'] = ''
         text = ''
+        if(reStr['title']==''):
+            reStr['title']=u'<title>(?P<title>[\s\S]*?)</title>'
         if (self.useUrllib2):
             response = urllib2.urlopen(url)
             text = response.read()
@@ -96,7 +98,7 @@ class Spider_Engine:
             text = Reslut.text
         # print type(text)
         # print text.decode('gbk')
-        title = re.findall(u'<title>(?P<title>[\s\S]*?)</title>', text, re.S)
+        title = re.findall(reStr['title'], text, re.S)
         try:
             post['title'] = "".join(title[0].split())
         except BaseException, e:

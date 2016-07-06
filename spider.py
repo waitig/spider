@@ -16,6 +16,7 @@ from s3_cnblog import SpiderCnblogs
 from s3_sina import SpiderSina
 from s3_segmentfault import SpiderSegement
 from s3_csdn import Spider_Csdn
+from s3_runoob import SpiderRunoob
 
 
 # 使用多线程操作，确保后台执行采集时前台界面不僵死
@@ -115,7 +116,8 @@ class SpiderClass(QtGui.QDialog, Ui_MainWindow):
         # self.disconnect(self.wk, QtCore.SIGNAL("insertDownloadUrl"), self.insertDownloadUrl)
 
     def sina_select(self):
-        self.tc = SpiderSina(self)
+        #self.tc = SpiderSina(self)
+        self.tc = SpiderRunoob(self)
 
     def cnblogs_select(self):
         self.tc = SpiderCnblogs(self)
@@ -248,7 +250,7 @@ if __name__ == "__main__":
     # splash.effective()
     # splash.effect()
     # splash.effect_show()
-    app.processEvents()
+    #app.processEvents()
     window = SpiderClass()
     # splash.checkEnd()
     window.show()

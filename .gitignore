@@ -9,6 +9,9 @@
 /bak
 .idea/vcs.xml
 .idea/jsLibraryMappings.xml
+*.rar
+_*
+*.pyc
 
 # Sensitive or high-churn files:
 .idea/dataSources.ids
@@ -17,6 +20,7 @@
 .idea/sqlDataSources.xml
 .idea/dynamic.xml
 .idea/uiDesigner.xml
+.idea
 
 /html
 # Gradle:
@@ -137,3 +141,5 @@ ENV/
 .ropeproject
 
 # Created by .ignore support plugin (hsz.mobi)
+*.name
+.idea/deployment.xml
